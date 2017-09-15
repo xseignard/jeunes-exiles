@@ -1,0 +1,23 @@
+{
+	"name": "jeunes-exiles",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node src"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/xseignard/jeunes-exiles.git"
+	},
+	"author": "Xavier Seignard",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/xseignard/jeunes-exiles/issues"
+	},
+	"homepage": "https://github.com/xseignard/jeunes-exiles#readme",
+	"devDependencies": {
+		"express": "^4.15.4",
+		"xml2js": "^0.4.19"
+	}
+}
