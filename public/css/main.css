@@ -2,3 +2,15 @@ body {
 	margin: 0;
 	overflow: hidden;
 }
+
+#infos {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+#infos a {
+	color: #fff;
+}
