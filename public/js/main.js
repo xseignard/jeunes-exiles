@@ -66,7 +66,7 @@
 	arWorldRoot.add(axis);
 
 	const loader = new THREE.TextureLoader();
-	loader.load('../assets/img/voir-la-video2.png', texture => {
+	loader.load('assets/img/voir-la-video2.png', texture => {
 		const geometry = new THREE.PlaneGeometry(1, 1, 1);
 		const material = new THREE.MeshBasicMaterial({
 			map: texture,
