@@ -14,7 +14,7 @@
 	const onRenderFcts = [];
 
 	const scene = new THREE.Scene();
-	const camera = ARjs.Utils.createDefaultCamera('best');
+	const camera = ARjs.Utils.createDefaultCamera('artoolkit');
 	scene.add(camera);
 
 	// const arProfile = new ARjs.Profile()
@@ -29,12 +29,6 @@
 		canvasWidth: 80 * 3,
 		canvasHeight: 60 * 3,
 	};
-	const markerParams = {
-		type: 'pattern',
-		patternUrl: 'assets/qr/pattern-tammam.patt',
-		changeMatrixMode: 'cameraTransformMatrix',
-		markersAreaEnabled: false,
-	};
 
 	const arSession = new ARjs.Session({
 		scene,
@@ -46,40 +40,28 @@
 	onRenderFcts.push(() => {
 		arSession.update();
 	});
-	const arAnchor = new ARjs.Anchor(arSession, markerParams);
-	onRenderFcts.push(() => {
-		arAnchor.update();
-	});
-	const hitTesting = new ARjs.HitTesting(arSession);
-	onRenderFcts.push(() => {
-		hitTesting.update(camera, arAnchor.object3d, arAnchor.parameters.changeMatrixMode);
-	});
-	renderer.domElement.addEventListener(
-		'click',
-		e => {
-			console.log(hitTesting.testDomEvent(e));
-		},
-		false
-	);
-	const arWorldRoot = arAnchor.object3d;
-	const axis = new THREE.AxisHelper();
-	arWorldRoot.add(axis);
 
-	const loader = new THREE.TextureLoader();
-	loader.load('assets/img/voir-la-video2.png', texture => {
-		const geometry = new THREE.PlaneGeometry(1, 1, 1);
-		const material = new THREE.MeshBasicMaterial({
-			map: texture,
-			transparent: true,
-			side: THREE.DoubleSide,
-		});
-		const mesh = new THREE.Mesh(geometry, material);
-		mesh.position.y = geometry.parameters.height / 2;
-		arWorldRoot.add(mesh);
-		onRenderFcts.push(delta => {
-			mesh.rotation.y += Math.PI * delta / 2;
-		});
+	const patterns = ['etrange-miroir', 'lamte', 'lucie', 'seitinta', 'tammam'];
+	const anchors = [];
+	patterns.forEach(pattern => {
+		anchors.push(
+			createAnchor(
+				arSession,
+				`assets/qr/pattern-${pattern}.patt`,
+				'assets/img/voir-la-video2.png',
+				`https://lesautrespossibles.fr/jeunes-exiles-${pattern}/`,
+				onRenderFcts
+			)
+		);
 	});
+	console.log(anchors);
+
+	// const hitTesting = new ARjs.HitTesting(arSession);
+	// onRenderFcts.push(() => {
+	// 	anchors.forEach(anchor => {
+	// 		hitTesting.update(camera, anchor.object3d, anchor.parameters.changeMatrixMode);
+	// 	});
+	// });
 
 	onRenderFcts.push(() => {
 		renderer.clear();
