@@ -1,18 +1,13 @@
-window.createAnchor = (session, pattern, pictogram, url, onRenderFcts) => {
-	const markerParams = {
+const createAnchor = (context, scene, camera, pattern, pictogram, url, onRenderFcts) => {
+	const marker = new THREEx.ArMarkerControls(context, camera, {
 		type: 'pattern',
 		patternUrl: pattern,
 		changeMatrixMode: 'cameraTransformMatrix',
-		markersAreaEnabled: false,
-	};
-	const anchor = new ARjs.Anchor(session, markerParams);
-	onRenderFcts.push(() => {
-		anchor.update();
 	});
-	const anchorWorldRoot = anchor.object3d;
-	anchorWorldRoot.userData.url = url;
+	marker.url = url;
+
 	const axis = new THREE.AxisHelper();
-	anchorWorldRoot.add(axis);
+	scene.add(axis);
 
 	const loader = new THREE.TextureLoader();
 	loader.load(pictogram, texture => {
@@ -24,13 +19,12 @@ window.createAnchor = (session, pattern, pictogram, url, onRenderFcts) => {
 		});
 		const mesh = new THREE.Mesh(geometry, material);
 		mesh.position.y = geometry.parameters.height / 2;
-		anchorWorldRoot.add(mesh);
-		mesh.addEventListener('click', () => {
-			console.log('test');
-		});
+		scene.add(mesh);
 		onRenderFcts.push(delta => {
 			mesh.rotation.y += Math.PI * delta / 2;
 		});
 	});
-	return anchor;
+	return marker;
 };
+
+export default createAnchor;
