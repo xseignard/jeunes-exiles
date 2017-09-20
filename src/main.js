@@ -39,9 +39,9 @@ setTimeout(() => {
 			for (let marker in pMarkers) {
 				if (pMarkers[marker].inCurrent) {
 					const current = markers.filter(m => parseInt(marker, 10) === m.id)[0];
+					if (current) currentTimeStamp = new Date();
 					if (currentUrl !== current.url) {
 						currentUrl = current.url;
-						currentTimeStamp = new Date();
 						console.log(currentUrl);
 					}
 				}
