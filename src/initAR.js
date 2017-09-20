@@ -1,23 +1,23 @@
-const initAR = (onRenderFcts, camera, scene) => {
+const initAR = (onRenderFcts, renderer, camera, scene) => {
 	const source = new THREEx.ArToolkitSource({
 		sourceType: 'webcam',
 	});
 	// handle resize
 	const onResize = () => {
-		source.onResize();
-		source.copySizeTo(renderer.domElement);
+		source.onResizeElement();
+		source.copyElementSizeTo(renderer.domElement);
 		if (context.arController !== null) {
-			source.copySizeTo(context.arController.canvas);
+			source.copyElementSizeTo(context.arController.canvas);
 		}
 	};
-	source.init(() => onResize);
-	window.addEventListener('resize', () => onResize);
+	source.init(onResize);
+	window.addEventListener('resize', onResize);
 
 	const context = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'assets/camera_para.dat',
-		maxDetectionRate: 30,
-		canvasWidth: 80 * 3,
-		canvasHeight: 60 * 3,
+		maxDetectionRate: 10,
+		canvasWidth: 80 * 6,
+		canvasHeight: 60 * 6,
 	});
 	context.init(() => {
 		camera.projectionMatrix.copy(context.getProjectionMatrix());

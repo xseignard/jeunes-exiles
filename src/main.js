@@ -1,36 +1,44 @@
 import initThree from './initThree';
 import initAR from './initAR';
-import createAnchor from './createAnchor';
+import createMarker from './createMarker';
 import './main.css';
+
+// current detected url
+// const url = document.querySelector('#url');
+let currentUrl = '';
 
 // array of functions for the rendering loop
 const onRenderFcts = [];
 // create the Three renderer, scene and camera
 const { renderer, scene, camera } = initThree();
 // create the AR source and context
-const { source, context } = initAR(onRenderFcts, camera, scene);
+const { source, context } = initAR(onRenderFcts, renderer, camera, scene);
 
 const patterns = ['etrange-miroir', 'lamte', 'lucie', 'seitinta', 'tammam'];
-const anchors = [];
+const markers = [];
 patterns.forEach(pattern => {
-	anchors.push(
-		createAnchor(
+	markers.push(
+		createMarker(
 			context,
 			scene,
-			camera,
 			`assets/qr/pattern-${pattern}.patt`,
-			'assets/img/voir-la-video2.png',
+			`assets/img/picto-${pattern}.png`,
 			`https://lesautrespossibles.fr/jeunes-exiles-${pattern}/`,
 			onRenderFcts
 		)
 	);
 });
-console.log(anchors);
+console.log(markers);
+// HACKY: give time for the context to be intialized before attaching the event listener
 setTimeout(() => {
 	context.arController.addEventListener('getMarker', e => {
 		if (e.data.marker.idPatt !== -1) {
-			const current = anchors.filter(anchor => e.data.marker.idPatt === anchor.id)[0];
-			console.log(e.data.marker.idPatt, current.url);
+			// console.log(e);
+			const current = markers.filter(m => e.data.marker.idPatt === m.id)[0];
+			if (currentUrl !== current.url) {
+				currentUrl = current.url;
+				console.log(currentUrl);
+			}
 		}
 	});
 }, 1000);

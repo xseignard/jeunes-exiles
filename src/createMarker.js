@@ -1,13 +1,17 @@
-const createAnchor = (context, scene, camera, pattern, pictogram, url, onRenderFcts) => {
-	const marker = new THREEx.ArMarkerControls(context, camera, {
+const createMarker = (context, scene, pattern, pictogram, url, onRenderFcts) => {
+	const markerRoot = new THREE.Group();
+	scene.add(markerRoot);
+
+	const marker = new THREEx.ArMarkerControls(context, markerRoot, {
 		type: 'pattern',
 		patternUrl: pattern,
-		changeMatrixMode: 'cameraTransformMatrix',
+		// changeMatrixMode: 'cameraTransformMatrix',
+		minConfidence: 0.6,
 	});
 	marker.url = url;
 
 	const axis = new THREE.AxisHelper();
-	scene.add(axis);
+	markerRoot.add(axis);
 
 	const loader = new THREE.TextureLoader();
 	loader.load(pictogram, texture => {
@@ -19,7 +23,7 @@ const createAnchor = (context, scene, camera, pattern, pictogram, url, onRenderF
 		});
 		const mesh = new THREE.Mesh(geometry, material);
 		mesh.position.y = geometry.parameters.height / 2;
-		scene.add(mesh);
+		markerRoot.add(mesh);
 		onRenderFcts.push(delta => {
 			mesh.rotation.y += Math.PI * delta / 2;
 		});
@@ -27,4 +31,4 @@ const createAnchor = (context, scene, camera, pattern, pictogram, url, onRenderF
 	return marker;
 };
 
-export default createAnchor;
+export default createMarker;
