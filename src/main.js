@@ -6,6 +6,7 @@ import './main.css';
 // current detected url
 // const url = document.querySelector('#url');
 let currentUrl = '';
+let currentTimeStamp = null;
 
 // array of functions for the rendering loop
 const onRenderFcts = [];
@@ -33,15 +34,34 @@ console.log(markers);
 setTimeout(() => {
 	context.arController.addEventListener('getMarker', e => {
 		if (e.data.marker.idPatt !== -1) {
-			// console.log(e);
-			const current = markers.filter(m => e.data.marker.idPatt === m.id)[0];
-			if (currentUrl !== current.url) {
-				currentUrl = current.url;
-				console.log(currentUrl);
+			// first version
+			const pMarkers = e.target.patternMarkers;
+			for (let marker in pMarkers) {
+				if (pMarkers[marker].inCurrent) {
+					const current = markers.filter(m => parseInt(marker, 10) === m.id)[0];
+					if (currentUrl !== current.url) {
+						currentUrl = current.url;
+						currentTimeStamp = new Date();
+						console.log(currentUrl);
+					}
+				}
 			}
+			// second version
+			// const current = markers.filter(m => e.data.marker.idPatt === m.id)[0];
+			// if (currentUrl !== current.url) {
+			// 	currentUrl = current.url;
+			// 	console.log(currentUrl);
+			// }
 		}
 	});
 }, 1000);
+
+window.addEventListener('click', e => {
+	const now = Date.now();
+	if (currentUrl && currentTimeStamp && now - currentTimeStamp < 5000) {
+		window.location = currentUrl;
+	}
+});
 
 onRenderFcts.push(() => {
 	renderer.render(scene, camera);
