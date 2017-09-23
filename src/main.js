@@ -29,37 +29,12 @@ patterns.forEach(pattern => {
 		)
 	);
 });
-console.log(markers);
-// HACKY: give time for the context to be intialized before attaching the event listener
-setTimeout(() => {
-	context.arController.addEventListener('getMarker', e => {
-		if (e.data.marker.idPatt !== -1) {
-			// first version
-			const pMarkers = e.target.patternMarkers;
-			for (let marker in pMarkers) {
-				if (pMarkers[marker].inCurrent) {
-					const current = markers.filter(m => parseInt(marker, 10) === m.id)[0];
-					if (current) currentTimeStamp = new Date();
-					if (currentUrl !== current.url) {
-						currentUrl = current.url;
-						console.log(currentUrl);
-					}
-				}
-			}
-			// second version
-			// const current = markers.filter(m => e.data.marker.idPatt === m.id)[0];
-			// if (currentUrl !== current.url) {
-			// 	currentUrl = current.url;
-			// 	console.log(currentUrl);
-			// }
-		}
-	});
-}, 1000);
 
 window.addEventListener('click', e => {
-	const now = Date.now();
-	if (currentUrl && currentTimeStamp && now - currentTimeStamp < 5000) {
-		window.location = currentUrl;
+	const visibleMarkers = markers.filter(m => m.object3d.visible);
+	if (visibleMarkers.length === 1) {
+		console.log(visibleMarkers[0].url);
+		// window.location = visibleMarkers[0].url
 	}
 });
 
