@@ -13,7 +13,10 @@ module.exports = {
 		filename: 'bundle.js',
 	},
 	module: {
-		rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }],
+		loaders: [
+			{ test: /\.css$/, use: ['style-loader', 'css-loader'] },
+			{ test: /\.js$/, use: ['babel-loader'] },
+		],
 	},
 	plugins,
 	devServer: {
