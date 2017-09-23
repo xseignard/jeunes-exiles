@@ -3,11 +3,6 @@ import initAR from './initAR';
 import createMarker from './createMarker';
 import './main.css';
 
-// current detected url
-// const url = document.querySelector('#url');
-let currentUrl = '';
-let currentTimeStamp = null;
-
 // array of functions for the rendering loop
 const onRenderFcts = [];
 // create the Three renderer, scene and camera
@@ -32,10 +27,7 @@ patterns.forEach(pattern => {
 
 window.addEventListener('click', e => {
 	const visibleMarkers = markers.filter(m => m.object3d.visible);
-	if (visibleMarkers.length === 1) {
-		console.log(visibleMarkers[0].url);
-		// window.location = visibleMarkers[0].url
-	}
+	if (visibleMarkers.length === 1) window.location = visibleMarkers[0].url;
 });
 
 onRenderFcts.push(() => {

@@ -15,19 +15,20 @@ const initAR = (onRenderFcts, renderer, camera, scene) => {
 
 	const context = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'assets/camera_para.dat',
-		maxDetectionRate: 10,
-		canvasWidth: 80 * 6,
-		canvasHeight: 60 * 6,
+		detectionMode: 'mono',
+		maxDetectionRate: 20,
+		canvasWidth: 80 * 3,
+		canvasHeight: 60 * 3,
 	});
 	context.init(() => {
 		camera.projectionMatrix.copy(context.getProjectionMatrix());
 	});
 
-	onRenderFcts.push(function() {
+	onRenderFcts.push(() => {
 		if (source.ready === false) return;
 		context.update(source.domElement);
-		scene.visible = camera.visible;
 	});
+
 	return { source, context };
 };
 
