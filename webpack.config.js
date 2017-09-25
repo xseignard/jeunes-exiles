@@ -11,7 +11,13 @@ if (process.env.NODE_ENV === 'production') {
 			},
 		})
 	);
-	plugins.push(new webpack.optimize.UglifyJsPlugin());
+	plugins.push(
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+			},
+		})
+	);
 	plugins.push(new webpack.optimize.AggressiveMergingPlugin());
 }
 
@@ -26,7 +32,7 @@ module.exports = {
 		loaders: [
 			{ test: /\.css$/, use: ['style-loader', 'css-loader'] },
 			{ test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'] },
-			{ test: /\.js$/, use: ['babel-loader'] },
+			{ test: /\.js$/, use: ['babel-loader'], include: [path.resolve(__dirname, 'src')] },
 		],
 	},
 	plugins,
