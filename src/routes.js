@@ -10,7 +10,7 @@ import Thanks from './components/Thanks';
 const history = createBrowserHistory();
 
 const Routes = props => (
-	<Router history={history}>
+	<Router history={history} basename="/jeunes-exiles/">
 		<div>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/AR" component={AR} />
