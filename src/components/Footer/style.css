@@ -1,0 +1,21 @@
+.footer {
+	width: 100%;
+}
+
+#footer-links {
+	display: flex;
+	justify-content: space-around;
+}
+
+.footer-link {
+	width: 15%;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	min-width: 10px;
+	max-width: 30px;
+}
+
+.footer-img {
+	width: 30px;
+	height: auto;
+}

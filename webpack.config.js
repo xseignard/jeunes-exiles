@@ -15,6 +15,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.css$/, use: ['style-loader', 'css-loader'] },
+			{ test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'] },
 			{ test: /\.js$/, use: ['babel-loader'] },
 		],
 	},
@@ -23,5 +24,6 @@ module.exports = {
 		contentBase: path.join(__dirname, 'dist'),
 		https: true,
 		host: '0.0.0.0',
+		historyApiFallback: true,
 	},
 };

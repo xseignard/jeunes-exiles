@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import initThree from './initThree';
 import initAR from './initAR';
 import createMarker from './createMarker';
+
+import Button from '../Button';
+
 import './style.css';
 
 class AR extends Component {
@@ -10,9 +13,10 @@ class AR extends Component {
 		const onRenderFcts = [];
 		// create the Three renderer, scene and camera
 		const { renderer, scene, camera } = initThree(this.canvas);
+		this.renderer = renderer;
 		// create the AR source and context
 		const { source, context } = initAR(onRenderFcts, renderer, camera, scene);
-
+		this.source = source;
 		const patterns = ['etrange-miroir', 'lamte', 'lucie', 'seitinta', 'tammam'];
 		const markers = [];
 		patterns.forEach(pattern => {
@@ -30,7 +34,7 @@ class AR extends Component {
 
 		window.addEventListener('click', e => {
 			const visibleMarkers = markers.filter(m => m.object3d.visible);
-			if (visibleMarkers.length === 1) window.location = visibleMarkers[0].url;
+			if (visibleMarkers.length === 1) window.location = `${visibleMarkers[0].url}#AR`;
 		});
 
 		onRenderFcts.push(() => {
@@ -49,14 +53,29 @@ class AR extends Component {
 		};
 		requestAnimationFrame(animate);
 	}
+
+	componentWillUnmount() {
+		this.renderer.dispose();
+		this.source.domElement.style.display = 'none';
+		setTimeout(() => {
+			// We can't reset the AR.js created elements (no dispose, reset or destroy methods available)
+			window.location.reload();
+		}, 50);
+	}
+
 	render() {
 		return (
-			<canvas
-				id="arCanvas"
-				ref={canvas => {
-					this.canvas = canvas;
-				}}
-			/>
+			<div>
+				<div className="p20 back">
+					<Button label="Retour" link="/" history={this.props.history} />
+				</div>
+				<canvas
+					id="arCanvas"
+					ref={canvas => {
+						this.canvas = canvas;
+					}}
+				/>
+			</div>
 		);
 	}
 }
