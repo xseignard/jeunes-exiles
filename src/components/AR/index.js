@@ -20,12 +20,13 @@ class AR extends Component {
 		const patterns = ['etrange-miroir', 'lamte', 'lucie', 'seitinta', 'tammam'];
 		const markers = [];
 		patterns.forEach(pattern => {
+			let picto = pattern === 'lamte' || pattern === 'seitinta' ? 'casque' : 'play';
 			markers.push(
 				createMarker(
 					context,
 					scene,
 					`assets/qr/pattern-${pattern}.patt`,
-					`assets/img/picto-${pattern}.png`,
+					`assets/img/picto-${picto}.png`,
 					`https://lesautrespossibles.fr/jeunes-exiles-${pattern}/`,
 					onRenderFcts
 				)

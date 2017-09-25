@@ -1,6 +1,6 @@
 const initThree = canvas => {
 	const renderer = new THREE.WebGLRenderer({
-		// antialias: true,
+		antialias: true,
 		alpha: true,
 		canvas,
 	});
