@@ -33,9 +33,8 @@
 	},
 	"dependencies": {
 		"material-ui": "^0.19.2",
-		"react": "^15.6.1",
-		"react-dom": "^15.6.1",
-		"react-router-dom": "^4.2.2",
-		"react-tap-event-plugin": "^2.0.1"
+		"react": "^16.0.0-rc.3",
+		"react-dom": "^16.0.0-rc.3",
+		"react-router-dom": "^4.2.2"
 	}
 }
