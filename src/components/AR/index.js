@@ -12,7 +12,7 @@ class AR extends Component {
 		// array of functions for the rendering loop
 		const onRenderFcts = [];
 		// create the Three renderer, scene and camera
-		const { renderer, scene, camera } = initThree(this.canvas);
+		const { renderer, scene, camera, directionalLight } = initThree(this.canvas);
 		this.renderer = renderer;
 		// create the AR source and context
 		const { source, context } = initAR(onRenderFcts, renderer, camera, scene);
@@ -25,6 +25,7 @@ class AR extends Component {
 				createMarker(
 					context,
 					scene,
+					directionalLight,
 					`assets/qr/pattern-${pattern}.patt`,
 					`assets/img/picto-${picto}.png`,
 					`https://lesautrespossibles.fr/jeunes-exiles-${pattern}/`,

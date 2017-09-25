@@ -1,4 +1,4 @@
-const createMarker = (context, scene, pattern, pictogram, url, onRenderFcts) => {
+const createMarker = (context, scene, light, pattern, pictogram, url, onRenderFcts) => {
 	const markerRoot = new THREE.Group();
 	scene.add(markerRoot);
 
@@ -15,19 +15,22 @@ const createMarker = (context, scene, pattern, pictogram, url, onRenderFcts) => 
 		color: '#d67c30',
 		side: THREE.DoubleSide,
 	});
-
 	const planeMesh = new THREE.Mesh(plane, colorMaterial);
 	planeMesh.rotation.x = Math.PI / 2;
 	markerRoot.add(planeMesh);
+
 	const loader = new THREE.TextureLoader();
 	loader.load(pictogram, texture => {
 		const geometry = new THREE.PlaneGeometry(1, 1, 1);
-		const material = new THREE.MeshBasicMaterial({
+		const material = new THREE.MeshLambertMaterial({
 			map: texture,
 			transparent: true,
 			side: THREE.DoubleSide,
 		});
 		const mesh = new THREE.Mesh(geometry, material);
+		mesh.castShadow = true;
+		mesh.receiveShadow = true;
+		light.target = mesh;
 		mesh.position.y = geometry.parameters.height / 2;
 		markerRoot.add(mesh);
 		onRenderFcts.push(delta => {
