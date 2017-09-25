@@ -6,14 +6,13 @@ const plugins = [new HtmlWebpackPlugin({ template: 'src/index.html' })];
 if (process.env.NODE_ENV === 'production') {
 	plugins.push(
 		new webpack.DefinePlugin({
-			// <-- key to reducing React's size
 			'process.env': {
 				NODE_ENV: JSON.stringify('production'),
 			},
 		})
 	);
-	plugins.push(new webpack.optimize.UglifyJsPlugin()); //minify everything
-	plugins.push(new webpack.optimize.AggressiveMergingPlugin()); //Merge chunks
+	plugins.push(new webpack.optimize.UglifyJsPlugin());
+	plugins.push(new webpack.optimize.AggressiveMergingPlugin());
 }
 
 module.exports = {
