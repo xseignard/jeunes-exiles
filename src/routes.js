@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import Home from './components/Home';
@@ -10,14 +10,14 @@ import Thanks from './components/Thanks';
 const history = createBrowserHistory();
 
 const Routes = props => (
-	<BrowserRouter basename="/jeunes-exiles/">
+	<HashRouter>
 		<div>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/AR" component={AR} />
 			<Route exact path="/fallback" component={Fallback} />
 			<Route exact path="/thanks" component={Thanks} />
 		</div>
-	</BrowserRouter>
+	</HashRouter>
 );
 
 export default Routes;
