@@ -42,7 +42,7 @@ const Home = props => {
 								'https://lesautrespossibles.fr/jeunes-exiles-tammam/#fallback')}
 					/>
 					<ListItem
-						primaryText="- En vidéo // un micro-documentaire lycéen sur la scolarisation des exilés"
+						primaryText="- En vidéo // Un micro-documentaire lycéen sur la scolarisation des exilés"
 						style={{ fontFamily: 'archer-book, serif' }}
 						onClick={e =>
 							(window.location =
