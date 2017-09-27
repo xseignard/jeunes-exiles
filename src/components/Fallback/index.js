@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { List, ListItem } from 'material-ui/List';
+import ArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -16,6 +17,7 @@ const Home = props => {
 					<ListItem
 						primaryText="- Son // Seïtinta, trois ans pour arriver jusqu’ici"
 						style={{ fontFamily: 'archer-book, serif' }}
+						rightIcon={<ArrowRight />}
 						onClick={e =>
 							(window.location =
 								'https://lesautrespossibles.fr/jeunes-exiles-seitinta/#fallback')}
@@ -23,6 +25,7 @@ const Home = props => {
 					<ListItem
 						primaryText="- Son // Le récit de Lamte de la Guinée à Nantes"
 						style={{ fontFamily: 'archer-book, serif' }}
+						rightIcon={<ArrowRight />}
 						onClick={e =>
 							(window.location =
 								'https://lesautrespossibles.fr/jeunes-exiles-lamte/#fallback')}
@@ -30,6 +33,7 @@ const Home = props => {
 					<ListItem
 						primaryText="- Diaporama sonore // Regards sur la ville"
 						style={{ fontFamily: 'archer-book, serif' }}
+						rightIcon={<ArrowRight />}
 						onClick={e =>
 							(window.location =
 								'https://lesautrespossibles.fr/jeunes-exiles-etrange-miroir/#fallback')}
@@ -37,6 +41,7 @@ const Home = props => {
 					<ListItem
 						primaryText="- En musique // Tammam rappe l’exil de la Syrie à Saint-Nazaire"
 						style={{ fontFamily: 'archer-book, serif' }}
+						rightIcon={<ArrowRight />}
 						onClick={e =>
 							(window.location =
 								'https://lesautrespossibles.fr/jeunes-exiles-tammam/#fallback')}
@@ -44,6 +49,7 @@ const Home = props => {
 					<ListItem
 						primaryText="- En vidéo // Un micro-documentaire lycéen sur la scolarisation des exilés"
 						style={{ fontFamily: 'archer-book, serif' }}
+						rightIcon={<ArrowRight />}
 						onClick={e =>
 							(window.location =
 								'https://lesautrespossibles.fr/jeunes-exiles-lucie/#fallback')}

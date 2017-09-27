@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const plugins = [new HtmlWebpackPlugin({ template: 'src/index.html' })];
+const plugins = [];
+plugins.push(new HtmlWebpackPlugin({ template: 'src/index.html' }));
 if (process.env.NODE_ENV === 'production') {
 	plugins.push(
 		new webpack.DefinePlugin({
@@ -18,7 +19,6 @@ if (process.env.NODE_ENV === 'production') {
 			},
 		})
 	);
-	plugins.push(new webpack.optimize.AggressiveMergingPlugin());
 }
 
 module.exports = {

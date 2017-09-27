@@ -68,8 +68,10 @@ class AR extends Component {
 	render() {
 		return (
 			<div>
-				<div className="p20 back">
-					<Button label="Retour" link="/" history={this.props.history} />
+				<div className="layer">
+					<div className="p20 back">
+						<Button label="Retour" link="/" history={this.props.history} />
+					</div>
 				</div>
 				<canvas
 					id="arCanvas"
