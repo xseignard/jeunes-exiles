@@ -22,14 +22,13 @@ const createMarker = (context, scene, light, pattern, pictogram, url, onRenderFc
 	const loader = new THREE.TextureLoader();
 	loader.load(pictogram, texture => {
 		const geometry = new THREE.PlaneGeometry(1, 1, 1);
-		const material = new THREE.MeshLambertMaterial({
+		const material = new THREE.MeshPhongMaterial({
 			map: texture,
 			transparent: true,
 			side: THREE.DoubleSide,
 		});
 		const mesh = new THREE.Mesh(geometry, material);
 		mesh.castShadow = true;
-		mesh.receiveShadow = true;
 		light.target = mesh;
 		mesh.position.y = geometry.parameters.height / 2;
 		markerRoot.add(mesh);

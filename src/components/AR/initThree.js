@@ -4,7 +4,6 @@ const initThree = canvas => {
 		alpha: true,
 		canvas,
 	});
-	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	renderer.shadowMap.enabled = true;
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0);
 	renderer.setSize(window.innerWidth, window.innerHeight);
